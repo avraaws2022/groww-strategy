@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockPulseIND - Portfolio Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a2235;
+            --bg-card-hover: #1f2a40;
+            --border: #2a3650;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-green: #10b981;
+            --accent-green-light: #34d399;
+            --accent-green-bg: rgba(16, 185, 129, 0.1);
+            --accent-red: #ef4444;
+            --accent-red-light: #f87171;
+            --accent-red-bg: rgba(239, 68, 68, 0.1);
+            --accent-blue: #3b82f6;
+            --accent-blue-bg: rgba(59, 130, 246, 0.1);
+            --accent-amber: #f59e0b;
+            --accent-amber-bg: rgba(245, 158, 11, 0.1);
+            --accent-purple: #8b5cf6;
+            --accent-purple-bg: rgba(139, 92, 246, 0.1);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(ellipse at 20% 50%, rgba(16,185,129,0.03) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.03) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 80%, rgba(139,92,246,0.02) 0%, transparent 50%);
+            z-index: -1;
+            animation: bgMove 20s ease-in-out infinite;
+        }
+        @keyframes bgMove { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-2%,-1%)} }
+
+        .container { max-width: 1440px; margin: 0 auto; padding: 24px 32px; }
+
+        /* NAVBAR */
+        .navbar { display:flex; justify-content:space-between; align-items:center; padding:16px 0; margin-bottom:32px; }
+        .navbar-brand { display:flex; align-items:center; gap:12px; }
+        .navbar-brand .logo {
+            width:40px; height:40px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            border-radius:12px; display:flex; align-items:center; justify-content:center;
+            font-size:18px; font-weight:800; color:white;
+        }
+        .navbar-brand h1 { font-size:22px; font-weight:700; background:linear-gradient(135deg,var(--text-primary),var(--text-secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .navbar-brand .subtitle { font-size:11px; color:var(--text-muted); letter-spacing:1px; text-transform:uppercase; }
+        .navbar-actions { display:flex; align-items:center; gap:16px; }
+        .market-status { display:flex; align-items:center; gap:8px; padding:8px 14px; background:var(--bg-card); border-radius:var(--radius-sm); border:1px solid var(--border); font-size:12px; color:var(--text-secondary); }
+        .market-dot { width:8px; height:8px; border-radius:50%; background:var(--accent-red); animation:pulse 2s infinite; }
+        .market-dot.open { background:var(--accent-green); }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .btn { padding:10px 20px; border-radius:var(--radius-sm); border:none; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; gap:8px; }
+        .btn-primary { background:linear-gradient(135deg,var(--accent-green),#059669); color:white; box-shadow:0 2px 12px rgba(16,185,129,0.3); }
+        .btn-primary:hover { transform:translateY(-1px); box-shadow:0 4px 20px rgba(16,185,129,0.4); }
+        .btn-ghost { background:var(--bg-card); color:var(--text-secondary); border:1px solid var(--border); }
+
+        .data-note { font-size:11px; color:var(--text-muted); padding:6px 12px; background:var(--bg-card); border-radius:6px; border:1px solid var(--border); }
+
+        /* SUMMARY */
+        .summary-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:28px; }
+        .summary-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; position:relative; overflow:hidden; transition:all 0.3s; }
+        .summary-card:hover { border-color:var(--accent-green); transform:translateY(-2px); box-shadow:var(--shadow); }
+        .summary-card .label { font-size:11px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); margin-bottom:8px; font-weight:500; }
+        .summary-card .value { font-size:32px; font-weight:800; line-height:1; }
+        .summary-card .value.green { color:var(--accent-green); }
+        .summary-card .value.red { color:var(--accent-red); }
+        .summary-card .value.blue { color:var(--accent-blue); }
+        .summary-card .value.amber { color:var(--accent-amber); }
+        .summary-card .value.purple { color:var(--accent-purple); }
+
+        /* TILES */
+        .tile-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+        .tile { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:all 0.3s; }
+        .tile:hover { border-color:rgba(148,163,184,0.2); box-shadow:var(--shadow); }
+        .tile-header { display:flex; justify-content:space-between; align-items:center; padding:20px 24px 16px; border-bottom:1px solid var(--border); }
+        .tile-title { display:flex; align-items:center; gap:10px; }
+        .tile-title .icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; }
+        .tile-title .icon.sell { background:var(--accent-red-bg); }
+        .tile-title .icon.buy { background:var(--accent-green-bg); }
+        .tile-title .icon.portfolio { background:var(--accent-blue-bg); }
+        .tile-title .icon.reco { background:var(--accent-purple-bg); }
+        .tile-title h2 { font-size:15px; font-weight:600; }
+        .tile-title p { font-size:11px; color:var(--text-muted); margin-top:2px; }
+        .badge { font-size:12px; font-weight:700; padding:4px 12px; border-radius:20px; }
+        .badge-sell { background:var(--accent-red-bg); color:var(--accent-red-light); }
+        .badge-buy { background:var(--accent-green-bg); color:var(--accent-green-light); }
+        .badge-neutral { background:rgba(100,116,139,0.15); color:var(--text-secondary); }
+        .badge-reco { background:var(--accent-purple-bg); color:var(--accent-purple); }
+        .tile-body { padding:12px 16px; max-height:420px; overflow-y:auto; }
+        .tile-body::-webkit-scrollbar { width:4px; }
+        .tile-body::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+
+        /* STOCK ROWS */
+        .stock-row { display:flex; align-items:center; padding:12px 14px; border-radius:var(--radius-sm); margin-bottom:4px; transition:all 0.2s; }
+        .stock-row:hover { background:var(--bg-card-hover); }
+        .stock-rank { width:24px; height:24px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; margin-right:12px; background:rgba(100,116,139,0.1); color:var(--text-muted); }
+        .stock-info { flex:1; min-width:0; }
+        .stock-symbol { font-size:14px; font-weight:600; display:flex; align-items:center; gap:8px; }
+        .stock-meta { font-size:11px; color:var(--text-muted); margin-top:3px; }
+        .stock-hint-text { font-size:11px; color:var(--text-secondary); margin-top:4px; line-height:1.4; }
+        .stock-values { text-align:right; flex-shrink:0; margin-left:12px; }
+        .stock-price { font-size:14px; font-weight:600; }
+        .stock-change { font-size:12px; font-weight:500; margin-top:2px; }
+        .stock-change.positive { color:var(--accent-green); }
+        .stock-change.negative { color:var(--accent-red); }
+        .hint-pill { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:700; padding:2px 8px; border-radius:6px; text-transform:uppercase; letter-spacing:0.5px; }
+        .hint-pill.sell { background:var(--accent-red-bg); color:var(--accent-red-light); }
+        .hint-pill.buy { background:var(--accent-green-bg); color:var(--accent-green-light); }
+        .sector-chip { display:inline-block; font-size:10px; font-weight:500; background:rgba(59,130,246,0.1); color:var(--accent-blue); padding:2px 8px; border-radius:4px; }
+        .stock-links { display:flex; gap:6px; margin-top:5px; }
+        .stock-links a { font-size:10px; text-decoration:none; padding:1px 5px; border-radius:3px; }
+        .link-groww { color:var(--accent-green); border:1px solid rgba(16,185,129,0.2); }
+        .link-google { color:var(--accent-blue); border:1px solid rgba(59,130,246,0.2); }
+        .link-news { color:var(--accent-purple); border:1px solid rgba(139,92,246,0.2); }
+
+        .score-dots { display:inline-flex; gap:3px; }
+        .score-dot { width:6px; height:6px; border-radius:50%; background:var(--border); }
+        .score-dot.active { background:var(--accent-green); }
+
+        /* THEME SECTION */
+        .theme-card { margin-bottom:20px; }
+        .theme-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; padding:10px 14px; background:rgba(139,92,246,0.05); border-radius:10px; border:1px solid rgba(139,92,246,0.1); }
+        .theme-emoji { font-size:24px; }
+        .theme-info { flex:1; }
+        .theme-name { font-size:14px; font-weight:700; }
+        .theme-trigger { font-size:11px; color:var(--text-muted); margin-top:2px; }
+
+        /* STATES */
+        .loading-state { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px; color:var(--text-muted); gap:12px; }
+        .loader { width:28px; height:28px; border:3px solid var(--border); border-top-color:var(--accent-green); border-radius:50%; animation:spin 0.8s linear infinite; }
+        @keyframes spin { to{transform:rotate(360deg)} }
+        .empty-state { text-align:center; padding:40px 20px; color:var(--text-muted); }
+        .empty-state .icon { font-size:32px; margin-bottom:12px; }
+        .error-state { margin:16px; padding:14px 18px; background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2); border-radius:var(--radius-sm); color:var(--accent-red-light); font-size:12px; }
+
+        @media (max-width:1024px) { .summary-grid{grid-template-columns:repeat(3,1fr)} .tile-grid{grid-template-columns:1fr} }
+        @media (max-width:768px) { .container{padding:16px} .summary-grid{grid-template-columns:repeat(2,1fr)} .navbar{flex-direction:column;gap:16px} }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <div class="logo">SP</div>
+                <div>
+                    <h1>StockPulseIND</h1>
+                    <div class="subtitle">Portfolio Intelligence</div>
+                </div>
+            </div>
+            <div class="navbar-actions">
+                <div class="market-status">
+                    <span class="market-dot" id="market-dot"></span>
+                    <span id="market-text">Market Closed</span>
+                </div>
+                <div class="data-note" id="last-updated">Loading data...</div>
+            </div>
+        </nav>
+
+        <div class="summary-grid">
+            <div class="summary-card"><div class="label">Total Holdings</div><div class="value blue" id="total-stocks">--</div></div>
+            <div class="summary-card"><div class="label">Buy Hints</div><div class="value green" id="buy-signals">--</div></div>
+            <div class="summary-card"><div class="label">Sell Hints</div><div class="value red" id="sell-signals">--</div></div>
+            <div class="summary-card"><div class="label">Hold</div><div class="value amber" id="hold-count">--</div></div>
+            <div class="summary-card"><div class="label">Recommendations</div><div class="value purple" id="reco-count">--</div></div>
+        </div>
+
+        <div class="tile-grid">
+            <div class="tile">
+                <div class="tile-header">
+                    <div class="tile-title"><div class="icon sell">&#x1F4C8;</div><div><h2>Sell Hints</h2><p>Stocks near 1-year high</p></div></div>
+                    <span class="badge badge-sell" id="sell-badge">0</span>
+                </div>
+                <div class="tile-body" id="sell-list"><div class="loading-state"><div class="loader"></div><span>Loading...</span></div></div>
+            </div>
+            <div class="tile">
+                <div class="tile-header">
+                    <div class="tile-title"><div class="icon buy">&#x1F4C9;</div><div><h2>Buy Hints</h2><p>Stocks near 6-month low</p></div></div>
+                    <span class="badge badge-buy" id="buy-badge">0</span>
+                </div>
+                <div class="tile-body" id="buy-list"><div class="loading-state"><div class="loader"></div><span>Loading...</span></div></div>
+            </div>
+        </div>
+
+        <div class="tile-grid">
+            <div class="tile">
+                <div class="tile-header">
+                    <div class="tile-title"><div class="icon portfolio">&#x1F4BC;</div><div><h2>My Portfolio</h2><p>All holdings by invested amount</p></div></div>
+                    <span class="badge badge-neutral" id="portfolio-badge">0</span>
+                </div>
+                <div class="tile-body" id="portfolio-list"><div class="loading-state"><div class="loader"></div><span>Loading...</span></div></div>
+            </div>
+            <div class="tile">
+                <div class="tile-header">
+                    <div class="tile-title"><div class="icon reco">&#x1F31F;</div><div><h2>New Recommendations</h2><p>Sector-aligned opportunities</p></div></div>
+                    <span class="badge badge-reco" id="reco-badge">0</span>
+                </div>
+                <div class="tile-body" id="reco-list"><div class="loading-state"><div class="loader"></div><span>Loading...</span></div></div>
+            </div>
+        </div>
+
+        <!-- MARKET PICKS -->
+        <div class="tile" style="border:1px solid rgba(139,92,246,0.3); margin-bottom:20px;">
+            <div class="tile-header" style="border-bottom-color:rgba(139,92,246,0.2);">
+                <div class="tile-title">
+                    <div class="icon" style="background:linear-gradient(135deg,var(--accent-purple-bg),rgba(59,130,246,0.1)); font-size:20px;">&#x1F310;</div>
+                    <div>
+                        <h2 style="background:linear-gradient(135deg,var(--accent-purple),var(--accent-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Market Picks</h2>
+                        <p>Global news & worldwide trends mapped to Indian stocks</p>
+                    </div>
+                </div>
+                <span class="badge" style="background:var(--accent-purple-bg);color:var(--accent-purple);" id="genz-badge">--</span>
+            </div>
+            <div class="tile-body" id="genz-list" style="max-height:600px;">
+                <div class="loading-state"><div class="loader"></div><span>Loading...</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const DATA_URL = 'data.json';
+
+        function updateMarketStatus() {
+            const now = new Date();
+            const ist = new Date(now.toLocaleString('en-US', {timeZone:'Asia/Kolkata'}));
+            const hours = ist.getHours(), mins = ist.getMinutes(), day = ist.getDay();
+            const time = hours*60+mins;
+            const isOpen = day>=1 && day<=5 && time>=555 && time<=930;
+            document.getElementById('market-dot').className = `market-dot ${isOpen?'open':''}`;
+            document.getElementById('market-text').textContent = isOpen ? 'Market Open' : 'Market Closed';
+        }
+        updateMarketStatus();
+        setInterval(updateMarketStatus, 60000);
+
+        function scoreDots(score, max=7) {
+            let h='<span class="score-dots">';
+            for(let i=0;i<max;i++) h+=`<span class="score-dot ${i<score?'active':''}"></span>`;
+            return h+'</span>';
+        }
+
+        function stockLinks(symbol) {
+            return `<div class="stock-links">
+                <a href="https://groww.in/stocks/${symbol}" target="_blank" class="link-groww">Groww</a>
+                <a href="https://www.google.com/finance/quote/${symbol}:NSE" target="_blank" class="link-google">Google</a>
+                <a href="https://www.google.com/search?q=${symbol}+NSE+stock+news&tbm=nws" target="_blank" class="link-news">News</a>
+            </div>`;
+        }
+
+        function renderStock(stock, type, index) {
+            let priceHtml='', metaHtml='', hintHtml='', pillHtml='';
+
+            if(type==='portfolio') {
+                priceHtml=`<div class="stock-price">&#8377;${stock.avg_price.toLocaleString()}</div><div class="stock-change" style="color:var(--text-muted)">Qty: ${stock.quantity}</div>`;
+                metaHtml=`Invested: &#8377;${stock.invested.toLocaleString('en-IN')}`;
+                if(stock.sector) metaHtml+=` &bull; <span class="sector-chip">${stock.sector}</span>`;
+            } else if(type==='sell') {
+                const cls=stock.pnl_pct>=0?'positive':'negative';
+                priceHtml=`<div class="stock-price">&#8377;${stock.current_price}</div><div class="stock-change ${cls}">${stock.pnl_pct>0?'+':''}${stock.pnl_pct}%</div>`;
+                metaHtml=`Avg: &#8377;${stock.avg_price} &bull; 1Y High: &#8377;${stock.high_1y}`;
+                hintHtml=stock.reason;
+                pillHtml='<span class="hint-pill sell">SELL</span>';
+            } else if(type==='buy') {
+                const cls=stock.pnl_pct>=0?'positive':'negative';
+                priceHtml=`<div class="stock-price">&#8377;${stock.current_price}</div><div class="stock-change ${cls}">${stock.pnl_pct>0?'+':''}${stock.pnl_pct}%</div>`;
+                metaHtml=`Avg: &#8377;${stock.avg_price} &bull; 6M Low: &#8377;${stock.low_6m}`;
+                hintHtml=stock.reason;
+                pillHtml='<span class="hint-pill buy">BUY MORE</span>';
+            } else if(type==='reco') {
+                const cls=stock.change_pct>=0?'positive':'negative';
+                priceHtml=`<div class="stock-price">&#8377;${stock.ltp}</div><div class="stock-change ${cls}">${stock.change_pct>0?'+':''}${stock.change_pct}%</div>`;
+                metaHtml=stock.signals?stock.signals.join(' &bull; '):'';
+                if(stock.sector) pillHtml=`<span class="sector-chip">${stock.sector}</span>`;
+                hintHtml=`Signal strength: ${scoreDots(stock.score)}`;
+            }
+
+            return `<div class="stock-row">
+                <div class="stock-rank">${index+1}</div>
+                <div class="stock-info">
+                    <div class="stock-symbol">${stock.symbol} ${pillHtml}</div>
+                    <div class="stock-meta">${metaHtml}</div>
+                    ${hintHtml?`<div class="stock-hint-text">${hintHtml}</div>`:''}
+                    ${stockLinks(stock.symbol)}
+                </div>
+                <div class="stock-values">${priceHtml}</div>
+            </div>`;
+        }
+
+        function emptyState(msg) { return `<div class="empty-state"><div class="icon">&#128203;</div><p>${msg}</p></div>`; }
+        function errorState(msg) { return `<div class="error-state">${msg}</div>`; }
+
+        async function loadData() {
+            try {
+                const resp = await fetch(DATA_URL + '?t=' + Date.now());
+                if (!resp.ok) throw new Error('Data not yet available. Run the workflow first.');
+                const data = await resp.json();
+
+                // Last updated
+                document.getElementById('last-updated').textContent = `Data: ${data.last_updated} (IST)`;
+
+                // Holdings
+                const holdings = data.holdings;
+                document.getElementById('portfolio-badge').textContent = holdings.count;
+                document.getElementById('total-stocks').textContent = holdings.count;
+                document.getElementById('portfolio-list').innerHTML = holdings.holdings.length > 0
+                    ? holdings.holdings.map((s,i) => renderStock(s,'portfolio',i)).join('')
+                    : emptyState('No holdings');
+
+                // Analysis
+                const analysis = data.analysis;
+                document.getElementById('buy-signals').textContent = analysis.summary.buy_count;
+                document.getElementById('sell-signals').textContent = analysis.summary.sell_count;
+                document.getElementById('hold-count').textContent = analysis.summary.hold_count;
+                document.getElementById('sell-badge').textContent = analysis.summary.sell_count;
+                document.getElementById('buy-badge').textContent = analysis.summary.buy_count;
+
+                document.getElementById('sell-list').innerHTML = analysis.sell_hints.length > 0
+                    ? analysis.sell_hints.map((s,i) => renderStock(s,'sell',i)).join('')
+                    : emptyState('No stocks near 1-year high');
+
+                document.getElementById('buy-list').innerHTML = analysis.buy_hints.length > 0
+                    ? analysis.buy_hints.map((s,i) => renderStock(s,'buy',i)).join('')
+                    : emptyState('No stocks near 6-month low');
+
+                // Recommendations
+                const recos = data.recommendations.recommendations;
+                document.getElementById('reco-badge').textContent = recos.length;
+                document.getElementById('reco-count').textContent = recos.length;
+                document.getElementById('reco-list').innerHTML = recos.length > 0
+                    ? recos.map((s,i) => renderStock(s,'reco',i)).join('')
+                    : emptyState('No signals (market may be closed)');
+
+                // Market Picks
+                const themes = data.genz.themes;
+                document.getElementById('genz-badge').textContent = themes.length + ' themes';
+                let genzHtml = '';
+                for (const theme of themes) {
+                    genzHtml += `<div class="theme-card"><div class="theme-header"><span class="theme-emoji">${theme.emoji}</span><div class="theme-info"><div class="theme-name">${theme.theme}</div><div class="theme-trigger">${theme.global_trigger}</div></div></div>`;
+                    for (const stock of theme.stocks) {
+                        const cls = stock.change_pct >= 0 ? 'positive' : 'negative';
+                        const priceHtml = stock.ltp > 0
+                            ? `<div class="stock-price">&#8377;${stock.ltp}</div><div class="stock-change ${cls}">${stock.change_pct>0?'+':''}${stock.change_pct}%</div>`
+                            : `<div class="stock-price" style="color:var(--text-muted)">--</div>`;
+                        genzHtml += `<div class="stock-row"><div class="stock-info"><div class="stock-symbol">${stock.symbol}</div><div class="stock-meta">${stock.reason||''}</div>${stockLinks(stock.symbol)}</div><div class="stock-values">${priceHtml}</div></div>`;
+                    }
+                    genzHtml += '</div>';
+                }
+                document.getElementById('genz-list').innerHTML = genzHtml;
+
+            } catch(e) {
+                document.getElementById('sell-list').innerHTML = errorState(e.message);
+                document.getElementById('buy-list').innerHTML = errorState(e.message);
+                document.getElementById('portfolio-list').innerHTML = errorState(e.message);
+                document.getElementById('reco-list').innerHTML = errorState(e.message);
+                document.getElementById('genz-list').innerHTML = errorState(e.message);
+            }
+        }
+
+        loadData();
+    </script>
+</body>
+</html>

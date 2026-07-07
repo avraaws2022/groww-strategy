@@ -1,0 +1,7 @@
+{
+  "last_updated": "Not yet fetched - run the workflow",
+  "holdings": {"holdings": [], "count": 0},
+  "analysis": {"sell_hints": [], "buy_hints": [], "neutral": [], "summary": {"total": 0, "sell_count": 0, "buy_count": 0, "hold_count": 0}},
+  "recommendations": {"recommendations": []},
+  "genz": {"themes": []}
+}

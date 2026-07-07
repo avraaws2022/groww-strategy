@@ -1,0 +1,44 @@
+name: Fetch Portfolio Data
+
+on:
+  schedule:
+    # Run every 30 minutes during Indian market hours (9:15-15:30 IST = 3:45-10:00 UTC)
+    - cron: '0,30 3-10 * * 1-5'
+    # Run once at 10:30 UTC (4pm IST) for end-of-day snapshot
+    - cron: '30 10 * * 1-5'
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 growwapi
+
+      - name: Fetch portfolio data
+        env:
+          GROWW_API_KEY: ${{ secrets.GROWW_API_KEY }}
+          GROWW_SECRET: ${{ secrets.GROWW_SECRET }}
+        run: python fetch_data.py
+
+      - name: Commit and push data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data.json
+          git diff --staged --quiet || git commit -m "Update portfolio data [$(date -u +%Y-%m-%dT%H:%M)]"
+          git push
