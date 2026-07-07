@@ -1,7 +1,1392 @@
 {
-  "last_updated": "Not yet fetched - run the workflow",
-  "holdings": {"holdings": [], "count": 0},
-  "analysis": {"sell_hints": [], "buy_hints": [], "neutral": [], "summary": {"total": 0, "sell_count": 0, "buy_count": 0, "hold_count": 0}},
-  "recommendations": {"recommendations": []},
-  "genz": {"themes": []}
+  "last_updated": "2026-07-07 01:18:37 UTC",
+  "holdings": {
+    "holdings": [
+      {
+        "symbol": "TITAN",
+        "quantity": 5,
+        "avg_price": 4026.6,
+        "invested": 20133.0,
+        "sector": "fmcg",
+        "sector_score": 2,
+        "sector_reason": "Consumption growth",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "ICLF21225",
+        "quantity": 20,
+        "avg_price": 1000.0,
+        "invested": 20000.0,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "ITC",
+        "quantity": 50,
+        "avg_price": 361.64,
+        "invested": 18082.0,
+        "sector": "fmcg",
+        "sector_score": 2,
+        "sector_reason": "Consumption growth",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "IIFL",
+        "quantity": 35,
+        "avg_price": 506.71,
+        "invested": 17734.85,
+        "sector": "fintech",
+        "sector_score": 3,
+        "sector_reason": "Digital India",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "HYUNDAI",
+        "quantity": 8,
+        "avg_price": 1960.0,
+        "invested": 15680.0,
+        "sector": "auto",
+        "sector_score": 3,
+        "sector_reason": "Auto demand recovery",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "HDFCBANK",
+        "quantity": 20,
+        "avg_price": 770.57,
+        "invested": 15411.4,
+        "sector": "fintech",
+        "sector_score": 3,
+        "sector_reason": "Digital India",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "BAJAJFINSV",
+        "quantity": 10,
+        "avg_price": 1384.31,
+        "invested": 13843.1,
+        "sector": "fintech",
+        "sector_score": 3,
+        "sector_reason": "Digital India",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "TATAPOWER",
+        "quantity": 60,
+        "avg_price": 222.14,
+        "invested": 13328.4,
+        "sector": "renewable_energy",
+        "sector_score": 4,
+        "sector_reason": "Green energy & PLI",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "TMPV",
+        "quantity": 32,
+        "avg_price": 363.81,
+        "invested": 11641.92,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "JSWINFRA",
+        "quantity": 40,
+        "avg_price": 233.48,
+        "invested": 9339.2,
+        "sector": "infrastructure",
+        "sector_score": 4,
+        "sector_reason": "PM Gati Shakti & NIP",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "KPRMILL",
+        "quantity": 10,
+        "avg_price": 910.6,
+        "invested": 9106.0,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "RECLTD",
+        "quantity": 25,
+        "avg_price": 362.9,
+        "invested": 9072.5,
+        "sector": "power_energy",
+        "sector_score": 4,
+        "sector_reason": "Power sector capex",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "GODREJCP",
+        "quantity": 10,
+        "avg_price": 878.77,
+        "invested": 8787.7,
+        "sector": "fmcg",
+        "sector_score": 2,
+        "sector_reason": "Consumption growth",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "PFC",
+        "quantity": 16,
+        "avg_price": 448.22,
+        "invested": 7171.52,
+        "sector": "power_energy",
+        "sector_score": 4,
+        "sector_reason": "Power sector capex",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "SILVERBEES",
+        "quantity": 20,
+        "avg_price": 315.62,
+        "invested": 6312.4,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "ITCHOTELS",
+        "quantity": 25,
+        "avg_price": 238.64,
+        "invested": 5966.0,
+        "sector": "tourism",
+        "sector_score": 3,
+        "sector_reason": "Travel boom",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "HINDCOPPER",
+        "quantity": 10,
+        "avg_price": 551.7,
+        "invested": 5517.0,
+        "sector": "metals",
+        "sector_score": 3,
+        "sector_reason": "Infrastructure demand",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "ARVINDFASN",
+        "quantity": 10,
+        "avg_price": 528.46,
+        "invested": 5284.6,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "TMCV",
+        "quantity": 32,
+        "avg_price": 164.6,
+        "invested": 5267.2,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "RAYMOND",
+        "quantity": 5,
+        "avg_price": 1001.34,
+        "invested": 5006.7,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "NETWEB",
+        "quantity": 2,
+        "avg_price": 2461.73,
+        "invested": 4923.46,
+        "sector": "electronics_mfg",
+        "sector_score": 4,
+        "sector_reason": "Semiconductor & PLI",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "ETERNAL",
+        "quantity": 20,
+        "avg_price": 241.48,
+        "invested": 4829.6,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "CROMPTON",
+        "quantity": 15,
+        "avg_price": 318.0,
+        "invested": 4770.0,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "SUMICHEM",
+        "quantity": 12,
+        "avg_price": 396.25,
+        "invested": 4755.0,
+        "sector": "agriculture",
+        "sector_score": 3,
+        "sector_reason": "MSP hikes & agri fund",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "TATASTEEL",
+        "quantity": 50,
+        "avg_price": 87.5,
+        "invested": 4375.0,
+        "sector": "metals",
+        "sector_score": 3,
+        "sector_reason": "Infrastructure demand",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "IRFC",
+        "quantity": 26,
+        "avg_price": 144.14,
+        "invested": 3747.64,
+        "sector": "railways",
+        "sector_score": 5,
+        "sector_reason": "Railway modernization",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "COROMANDEL",
+        "quantity": 4,
+        "avg_price": 850.4,
+        "invested": 3401.6,
+        "sector": "agriculture",
+        "sector_score": 3,
+        "sector_reason": "MSP hikes & agri fund",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "TRENT",
+        "quantity": 3,
+        "avg_price": 1129.63,
+        "invested": 3388.89,
+        "sector": "fmcg",
+        "sector_score": 2,
+        "sector_reason": "Consumption growth",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "RAYMONDREL",
+        "quantity": 5,
+        "avg_price": 642.36,
+        "invested": 3211.8,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "POWERGRID",
+        "quantity": 20,
+        "avg_price": 156.36,
+        "invested": 3127.2,
+        "sector": "power_energy",
+        "sector_score": 4,
+        "sector_reason": "Power sector capex",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "ONGC",
+        "quantity": 20,
+        "avg_price": 150.81,
+        "invested": 3016.2,
+        "sector": "power_energy",
+        "sector_score": 4,
+        "sector_reason": "Power sector capex",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "VBL",
+        "quantity": 5,
+        "avg_price": 599.0,
+        "invested": 2995.0,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "EXIDEIND",
+        "quantity": 15,
+        "avg_price": 184.01,
+        "invested": 2760.15,
+        "sector": "ev_auto",
+        "sector_score": 4,
+        "sector_reason": "FAME subsidy & EV push",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "IDEA",
+        "quantity": 205,
+        "avg_price": 12.83,
+        "invested": 2630.15,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "BAJAJHFL",
+        "quantity": 18,
+        "avg_price": 145.56,
+        "invested": 2620.08,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "NIFTYBEES",
+        "quantity": 10,
+        "avg_price": 258.81,
+        "invested": 2588.1,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "PSB",
+        "quantity": 75,
+        "avg_price": 34.36,
+        "invested": 2577.0,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "SAGILITY",
+        "quantity": 50,
+        "avg_price": 49.97,
+        "invested": 2498.5,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "SETFNIF50",
+        "quantity": 10,
+        "avg_price": 245.23,
+        "invested": 2452.3,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "UNOMINDA",
+        "quantity": 4,
+        "avg_price": 597.88,
+        "invested": 2391.52,
+        "sector": "ev_auto",
+        "sector_score": 4,
+        "sector_reason": "FAME subsidy & EV push",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "IOC",
+        "quantity": 30,
+        "avg_price": 69.13,
+        "invested": 2073.9,
+        "sector": "power_energy",
+        "sector_score": 4,
+        "sector_reason": "Power sector capex",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "COMFINTE",
+        "quantity": 200,
+        "avg_price": 10.26,
+        "invested": 2052.0,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "TRIDENT",
+        "quantity": 50,
+        "avg_price": 32.77,
+        "invested": 1638.5,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "CCAVENUE",
+        "quantity": 75,
+        "avg_price": 21.32,
+        "invested": 1599.0,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "SWIGGY",
+        "quantity": 3,
+        "avg_price": 390.0,
+        "invested": 1170.0,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "OLAELEC",
+        "quantity": 10,
+        "avg_price": 111.63,
+        "invested": 1116.3,
+        "sector": "ev_auto",
+        "sector_score": 4,
+        "sector_reason": "FAME subsidy & EV push",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "SUZLON",
+        "quantity": 15,
+        "avg_price": 66.56,
+        "invested": 998.4,
+        "sector": "renewable_energy",
+        "sector_score": 4,
+        "sector_reason": "Green energy & PLI",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "IDFCFIRSTB",
+        "quantity": 15,
+        "avg_price": 61.5,
+        "invested": 922.5,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "VEDL",
+        "quantity": 3,
+        "avg_price": 160.56,
+        "invested": 481.68,
+        "sector": "metals",
+        "sector_score": 3,
+        "sector_reason": "Infrastructure demand",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "VOGL",
+        "quantity": 3,
+        "avg_price": 65.92,
+        "invested": 197.76,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "MID150CASE",
+        "quantity": 19,
+        "avg_price": 9.83,
+        "invested": 186.77,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "VEDPOWER",
+        "quantity": 3,
+        "avg_price": 37.52,
+        "invested": 112.56,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "VAML",
+        "quantity": 3,
+        "avg_price": 21.93,
+        "invested": 65.79,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "VISL",
+        "quantity": 3,
+        "avg_price": 20.83,
+        "invested": 62.49,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      },
+      {
+        "symbol": "RAYMONDLSL",
+        "quantity": 4,
+        "avg_price": 10.95,
+        "invested": 43.8,
+        "sector": "",
+        "sector_score": 0,
+        "sector_reason": "",
+        "exchanges": [
+          "NSE",
+          "BSE"
+        ]
+      }
+    ],
+    "count": 55
+  },
+  "analysis": {
+    "sell_hints": [],
+    "buy_hints": [],
+    "neutral": [
+      {
+        "symbol": "TITAN",
+        "qty": 5,
+        "avg_price": 4026.6,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "ICLF21225",
+        "qty": 20,
+        "avg_price": 1000.0,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "ITC",
+        "qty": 50,
+        "avg_price": 361.64,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "IIFL",
+        "qty": 35,
+        "avg_price": 506.71,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "HYUNDAI",
+        "qty": 8,
+        "avg_price": 1960.0,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "HDFCBANK",
+        "qty": 20,
+        "avg_price": 770.57,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "BAJAJFINSV",
+        "qty": 10,
+        "avg_price": 1384.31,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "TATAPOWER",
+        "qty": 60,
+        "avg_price": 222.14,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "TMPV",
+        "qty": 32,
+        "avg_price": 363.81,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "JSWINFRA",
+        "qty": 40,
+        "avg_price": 233.48,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "KPRMILL",
+        "qty": 10,
+        "avg_price": 910.6,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "RECLTD",
+        "qty": 25,
+        "avg_price": 362.9,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "GODREJCP",
+        "qty": 10,
+        "avg_price": 878.77,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "PFC",
+        "qty": 16,
+        "avg_price": 448.22,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "SILVERBEES",
+        "qty": 20,
+        "avg_price": 315.62,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "ITCHOTELS",
+        "qty": 25,
+        "avg_price": 238.64,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "HINDCOPPER",
+        "qty": 10,
+        "avg_price": 551.7,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "ARVINDFASN",
+        "qty": 10,
+        "avg_price": 528.46,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "TMCV",
+        "qty": 32,
+        "avg_price": 164.6,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "RAYMOND",
+        "qty": 5,
+        "avg_price": 1001.34,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "NETWEB",
+        "qty": 2,
+        "avg_price": 2461.73,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "ETERNAL",
+        "qty": 20,
+        "avg_price": 241.48,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "CROMPTON",
+        "qty": 15,
+        "avg_price": 318.0,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "SUMICHEM",
+        "qty": 12,
+        "avg_price": 396.25,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "TATASTEEL",
+        "qty": 50,
+        "avg_price": 87.5,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "IRFC",
+        "qty": 26,
+        "avg_price": 144.14,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "COROMANDEL",
+        "qty": 4,
+        "avg_price": 850.4,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "TRENT",
+        "qty": 3,
+        "avg_price": 1129.63,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "RAYMONDREL",
+        "qty": 5,
+        "avg_price": 642.36,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "POWERGRID",
+        "qty": 20,
+        "avg_price": 156.36,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "ONGC",
+        "qty": 20,
+        "avg_price": 150.81,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "VBL",
+        "qty": 5,
+        "avg_price": 599.0,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "EXIDEIND",
+        "qty": 15,
+        "avg_price": 184.01,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "IDEA",
+        "qty": 205,
+        "avg_price": 12.83,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "BAJAJHFL",
+        "qty": 18,
+        "avg_price": 145.56,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "NIFTYBEES",
+        "qty": 10,
+        "avg_price": 258.81,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "PSB",
+        "qty": 75,
+        "avg_price": 34.36,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "SAGILITY",
+        "qty": 50,
+        "avg_price": 49.97,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "SETFNIF50",
+        "qty": 10,
+        "avg_price": 245.23,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "UNOMINDA",
+        "qty": 4,
+        "avg_price": 597.88,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "IOC",
+        "qty": 30,
+        "avg_price": 69.13,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "COMFINTE",
+        "qty": 200,
+        "avg_price": 10.26,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "TRIDENT",
+        "qty": 50,
+        "avg_price": 32.77,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "CCAVENUE",
+        "qty": 75,
+        "avg_price": 21.32,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "SWIGGY",
+        "qty": 3,
+        "avg_price": 390.0,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "OLAELEC",
+        "qty": 10,
+        "avg_price": 111.63,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "SUZLON",
+        "qty": 15,
+        "avg_price": 66.56,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "IDFCFIRSTB",
+        "qty": 15,
+        "avg_price": 61.5,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "VEDL",
+        "qty": 3,
+        "avg_price": 160.56,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "VOGL",
+        "qty": 3,
+        "avg_price": 65.92,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "MID150CASE",
+        "qty": 19,
+        "avg_price": 9.83,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "VEDPOWER",
+        "qty": 3,
+        "avg_price": 37.52,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "VAML",
+        "qty": 3,
+        "avg_price": 21.93,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "VISL",
+        "qty": 3,
+        "avg_price": 20.83,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      },
+      {
+        "symbol": "RAYMONDLSL",
+        "qty": 4,
+        "avg_price": 10.95,
+        "hint": "ERROR",
+        "reason": "GrowwAPI.get_historical_candles() got an unexpected keyword argument 'trading_symbol'"
+      }
+    ],
+    "summary": {
+      "total": 55,
+      "sell_count": 0,
+      "buy_count": 0,
+      "hold_count": 55
+    }
+  },
+  "recommendations": {
+    "recommendations": []
+  },
+  "genz": {
+    "themes": [
+      {
+        "theme": "AI & Semiconductors",
+        "emoji": "\ud83e\udd16",
+        "global_trigger": "NVIDIA rally, ChatGPT boom, global AI capex surge",
+        "stocks": [
+          {
+            "symbol": "NETWEB",
+            "reason": "Semiconductor & PLI",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "DIXON",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "KAYNES",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "PERSISTENT",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "LTTS",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          }
+        ]
+      },
+      {
+        "theme": "EV & Clean Mobility",
+        "emoji": "\u26a1",
+        "global_trigger": "Tesla expansion, EU ICE ban 2035, lithium demand",
+        "stocks": [
+          {
+            "symbol": "OLAELEC",
+            "reason": "FAME subsidy & EV push",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "EXIDEIND",
+            "reason": "FAME subsidy & EV push",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "TATAMOTORS",
+            "reason": "Auto demand recovery",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "OLECTRA",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "UNOMINDA",
+            "reason": "FAME subsidy & EV push",
+            "ltp": 0,
+            "change_pct": 0
+          }
+        ]
+      },
+      {
+        "theme": "Green Energy & Climate",
+        "emoji": "\ud83c\udf0d",
+        "global_trigger": "COP targets, US IRA spending, green hydrogen push",
+        "stocks": [
+          {
+            "symbol": "SUZLON",
+            "reason": "Green energy & PLI",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "TATAPOWER",
+            "reason": "Green energy & PLI",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "NHPC",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "SJVN",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          }
+        ]
+      },
+      {
+        "theme": "Digital Payments & Fintech",
+        "emoji": "\ud83d\udcb3",
+        "global_trigger": "UPI global expansion, CBDC rollouts, cashless economy",
+        "stocks": [
+          {
+            "symbol": "BAJAJFINSV",
+            "reason": "Digital India",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "IIFL",
+            "reason": "Digital India",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "IDFCFIRSTB",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          }
+        ]
+      },
+      {
+        "theme": "Space & Defence Tech",
+        "emoji": "\ud83d\ude80",
+        "global_trigger": "SpaceX launches, geopolitical tensions, drone warfare",
+        "stocks": [
+          {
+            "symbol": "HAL",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "BEL",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "MAZAGON",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "BDL",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "COCHINSHIP",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          }
+        ]
+      },
+      {
+        "theme": "Digital Health & Pharma",
+        "emoji": "\ud83e\uddec",
+        "global_trigger": "GLP-1 drug boom, telemedicine growth, AI diagnostics",
+        "stocks": [
+          {
+            "symbol": "LALPATHLAB",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "MAXHEALTH",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "LAURUSLABS",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "AUROPHARMA",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          }
+        ]
+      },
+      {
+        "theme": "Creator Economy & Digital",
+        "emoji": "\ud83c\udfae",
+        "global_trigger": "YouTube India #1, gaming boom, D2C brands",
+        "stocks": [
+          {
+            "symbol": "SAGILITY",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "ETERNAL",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "SWIGGY",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "VBL",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          }
+        ]
+      },
+      {
+        "theme": "Infrastructure & Smart Cities",
+        "emoji": "\ud83c\udfd7\ufe0f",
+        "global_trigger": "India fastest growing G20, urbanization, $1.5T infra plan",
+        "stocks": [
+          {
+            "symbol": "JSWINFRA",
+            "reason": "PM Gati Shakti & NIP",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "NCC",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "NBCC",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "RVNL",
+            "reason": "",
+            "ltp": 0,
+            "change_pct": 0
+          },
+          {
+            "symbol": "IRFC",
+            "reason": "Railway modernization",
+            "ltp": 0,
+            "change_pct": 0
+          }
+        ]
+      }
+    ]
+  }
 }
