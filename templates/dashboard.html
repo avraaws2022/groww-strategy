@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockPulseIND - Portfolio Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a2235;
+            --bg-card-hover: #1f2a40;
+            --border: #2a3650;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-green: #10b981;
+            --accent-green-light: #34d399;
+            --accent-green-bg: rgba(16, 185, 129, 0.1);
+            --accent-red: #ef4444;
+            --accent-red-light: #f87171;
+            --accent-red-bg: rgba(239, 68, 68, 0.1);
+            --accent-blue: #3b82f6;
+            --accent-blue-bg: rgba(59, 130, 246, 0.1);
+            --accent-amber: #f59e0b;
+            --accent-amber-bg: rgba(245, 158, 11, 0.1);
+            --accent-purple: #8b5cf6;
+            --accent-purple-bg: rgba(139, 92, 246, 0.1);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 20% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 80%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
+            z-index: -1;
+            animation: bgMove 20s ease-in-out infinite;
+        }
+        @keyframes bgMove {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-2%, -1%); }
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 24px 32px;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            margin-bottom: 32px;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .navbar-brand .logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: white;
+        }
+        .navbar-brand h1 {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .navbar-brand .subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .market-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .market-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-red);
+            animation: pulse 2s infinite;
+        }
+        .market-dot.open { background: var(--accent-green); }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-green), #059669);
+            color: white;
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+        }
+        .btn-ghost {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        .btn-ghost:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+
+        /* SUMMARY CARDS */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .summary-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        .summary-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            opacity: 0.05;
+            transform: translate(20px, -20px);
+        }
+        .summary-card.green::after { background: var(--accent-green); }
+        .summary-card.red::after { background: var(--accent-red); }
+        .summary-card.blue::after { background: var(--accent-blue); }
+        .summary-card.amber::after { background: var(--accent-amber); }
+        .summary-card.purple::after { background: var(--accent-purple); }
+
+        .summary-card .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .summary-card .value {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .summary-card .value.green { color: var(--accent-green); }
+        .summary-card .value.red { color: var(--accent-red); }
+        .summary-card .value.blue { color: var(--accent-blue); }
+        .summary-card .value.amber { color: var(--accent-amber); }
+
+        /* TILE GRID */
+        .tile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .tile {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .tile:hover {
+            border-color: rgba(148, 163, 184, 0.2);
+            box-shadow: var(--shadow);
+        }
+        .tile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .tile-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tile-title .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .tile-title .icon.sell { background: var(--accent-red-bg); }
+        .tile-title .icon.buy { background: var(--accent-green-bg); }
+        .tile-title .icon.portfolio { background: var(--accent-blue-bg); }
+        .tile-title .icon.reco { background: var(--accent-purple-bg); }
+
+        .tile-title h2 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .tile-title p {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .badge {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        .badge-sell { background: var(--accent-red-bg); color: var(--accent-red-light); }
+        .badge-buy { background: var(--accent-green-bg); color: var(--accent-green-light); }
+        .badge-neutral { background: rgba(100, 116, 139, 0.15); color: var(--text-secondary); }
+        .badge-reco { background: var(--accent-purple-bg); color: var(--accent-purple); }
+
+        .tile-body {
+            padding: 12px 16px;
+            max-height: 420px;
+            overflow-y: auto;
+        }
+        .tile-body::-webkit-scrollbar { width: 4px; }
+        .tile-body::-webkit-scrollbar-track { background: transparent; }
+        .tile-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+        /* STOCK ROWS */
+        .stock-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 4px;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+        .stock-row:hover { background: var(--bg-card-hover); }
+
+        .stock-rank {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            margin-right: 12px;
+            background: rgba(100, 116, 139, 0.1);
+            color: var(--text-muted);
+        }
+
+        .stock-info { flex: 1; min-width: 0; }
+        .stock-symbol {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .stock-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .stock-hint-text {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .stock-values {
+            text-align: right;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+        .stock-price {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .stock-change {
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+        .stock-change.positive { color: var(--accent-green); }
+        .stock-change.negative { color: var(--accent-red); }
+
+        .hint-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hint-pill.sell { background: var(--accent-red-bg); color: var(--accent-red-light); }
+        .hint-pill.buy { background: var(--accent-green-bg); color: var(--accent-green-light); }
+        .hint-pill.hold { background: rgba(100, 116, 139, 0.1); color: var(--text-muted); }
+
+        .sector-chip {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 500;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .score-dots {
+            display: inline-flex;
+            gap: 3px;
+            margin-left: 4px;
+        }
+        .score-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+        .score-dot.active { background: var(--accent-green); }
+
+        /* LOADING & EMPTY STATES */
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px;
+            color: var(--text-muted);
+            gap: 12px;
+        }
+        .loader {
+            width: 28px;
+            height: 28px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent-green);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+        .empty-state .icon { font-size: 32px; margin-bottom: 12px; }
+        .empty-state p { font-size: 13px; }
+
+        .error-state {
+            margin: 16px;
+            padding: 14px 18px;
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: var(--radius-sm);
+            color: var(--accent-red-light);
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .summary-grid { grid-template-columns: repeat(3, 1fr); }
+            .tile-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .container { padding: 16px; }
+            .summary-grid { grid-template-columns: repeat(2, 1fr); }
+            .navbar { flex-direction: column; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <div class="logo">SP</div>
+                <div>
+                    <h1>StockPulseIND</h1>
+                    <div class="subtitle">Portfolio Intelligence</div>
+                </div>
+            </div>
+            <div class="navbar-actions">
+                <div class="market-status">
+                    <span class="market-dot" id="market-dot"></span>
+                    <span id="market-text">Market Closed</span>
+                </div>
+                <button class="btn btn-ghost" id="last-updated-btn">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v4m0 12v4m10-10h-4M6 12H2m15.07-5.07l-2.83 2.83M9.76 14.24l-2.83 2.83m11.14 0l-2.83-2.83M9.76 9.76L6.93 6.93"/></svg>
+                    <span id="last-updated">--:--</span>
+                </button>
+                <button class="btn btn-primary" onclick="loadAll()">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    Refresh
+                </button>
+            </div>
+        </nav>
+
+        <!-- SUMMARY CARDS -->
+        <div class="summary-grid">
+            <div class="summary-card blue">
+                <div class="label">Total Holdings</div>
+                <div class="value blue" id="total-stocks">--</div>
+            </div>
+            <div class="summary-card green">
+                <div class="label">Buy Hints</div>
+                <div class="value green" id="buy-signals">--</div>
+            </div>
+            <div class="summary-card red">
+                <div class="label">Sell Hints</div>
+                <div class="value red" id="sell-signals">--</div>
+            </div>
+            <div class="summary-card amber">
+                <div class="label">Hold</div>
+                <div class="value amber" id="hold-count">--</div>
+            </div>
+            <div class="summary-card purple">
+                <div class="label">Recommendations</div>
+                <div class="value" style="color:var(--accent-purple)" id="reco-count">--</div>
+            </div>
+        </div>
+
+        <!-- SELL + BUY TILES -->
+        <div class="tile-grid">
+            <div class="tile">
+                <div class="tile-header">
+                    <div class="tile-title">
+                        <div class="icon sell">&#x1F4C8;</div>
+                        <div>
+                            <h2>Sell Hints</h2>
+                            <p>Stocks near their 1-year high</p>
+                        </div>
+                    </div>
+                    <span class="badge badge-sell" id="sell-badge">0</span>
+                </div>
+                <div class="tile-body" id="sell-list">
+                    <div class="loading-state"><div class="loader"></div><span>Analyzing...</span></div>
+                </div>
+            </div>
+
+            <div class="tile">
+                <div class="tile-header">
+                    <div class="tile-title">
+                        <div class="icon buy">&#x1F4C9;</div>
+                        <div>
+                            <h2>Buy Hints</h2>
+                            <p>Stocks near their 6-month low</p>
+                        </div>
+                    </div>
+                    <span class="badge badge-buy" id="buy-badge">0</span>
+                </div>
+                <div class="tile-body" id="buy-list">
+                    <div class="loading-state"><div class="loader"></div><span>Analyzing...</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PORTFOLIO + RECOMMENDATIONS TILES -->
+        <div class="tile-grid">
+            <div class="tile">
+                <div class="tile-header">
+                    <div class="tile-title">
+                        <div class="icon portfolio">&#x1F4BC;</div>
+                        <div>
+                            <h2>My Portfolio</h2>
+                            <p>All holdings by invested amount</p>
+                        </div>
+                    </div>
+                    <span class="badge badge-neutral" id="portfolio-badge">0</span>
+                </div>
+                <div class="tile-body" id="portfolio-list">
+                    <div class="loading-state"><div class="loader"></div><span>Loading holdings...</span></div>
+                </div>
+            </div>
+
+            <div class="tile">
+                <div class="tile-header">
+                    <div class="tile-title">
+                        <div class="icon reco">&#x1F31F;</div>
+                        <div>
+                            <h2>New Recommendations</h2>
+                            <p>Sector-aligned opportunities</p>
+                        </div>
+                    </div>
+                    <span class="badge badge-reco" id="reco-badge">0</span>
+                </div>
+                <div class="tile-body" id="reco-list">
+                    <div class="loading-state"><div class="loader"></div><span>Scanning market...</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GENZ MATURE SECTION -->
+        <div style="margin-bottom: 20px;">
+            <div class="tile" style="border: 1px solid rgba(139, 92, 246, 0.3);">
+                <div class="tile-header" style="border-bottom-color: rgba(139, 92, 246, 0.2);">
+                    <div class="tile-title">
+                        <div class="icon" style="background: linear-gradient(135deg, var(--accent-purple-bg), rgba(59, 130, 246, 0.1)); font-size: 20px;">&#x1F310;</div>
+                        <div>
+                            <h2 style="background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Market Picks</h2>
+                            <p>Global news &amp; worldwide trends mapped to Indian stocks</p>
+                        </div>
+                    </div>
+                    <span class="badge" style="background: var(--accent-purple-bg); color: var(--accent-purple);" id="genz-badge">8 themes</span>
+                </div>
+                <div class="tile-body" id="genz-list" style="max-height: 600px;">
+                    <div class="loading-state"><div class="loader"></div><span>Loading global trends...</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Market status check
+        function updateMarketStatus() {
+            const now = new Date();
+            const ist = new Date(now.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));
+            const hours = ist.getHours();
+            const mins = ist.getMinutes();
+            const day = ist.getDay();
+            const time = hours * 60 + mins;
+            const isOpen = day >= 1 && day <= 5 && time >= 555 && time <= 930; // 9:15-15:30
+            document.getElementById('market-dot').className = `market-dot ${isOpen ? 'open' : ''}`;
+            document.getElementById('market-text').textContent = isOpen ? 'Market Open' : 'Market Closed';
+        }
+        updateMarketStatus();
+        setInterval(updateMarketStatus, 60000);
+
+        function scoreDots(score, max=7) {
+            let html = '<span class="score-dots">';
+            for (let i = 0; i < max; i++) {
+                html += `<span class="score-dot ${i < score ? 'active' : ''}"></span>`;
+            }
+            return html + '</span>';
+        }
+
+        function renderStock(stock, type, index) {
+            let priceHtml = '', metaHtml = '', hintHtml = '', pillHtml = '';
+
+            if (type === 'portfolio') {
+                priceHtml = `<div class="stock-price">&#8377;${stock.avg_price.toLocaleString()}</div>
+                             <div class="stock-change" style="color:var(--text-muted)">Qty: ${stock.quantity}</div>`;
+                metaHtml = `Invested: &#8377;${stock.invested.toLocaleString('en-IN')}`;
+                if (stock.sector) metaHtml += ` &bull; <span class="sector-chip">${stock.sector}</span>`;
+            }
+            else if (type === 'sell') {
+                const cls = stock.pnl_pct >= 0 ? 'positive' : 'negative';
+                priceHtml = `<div class="stock-price">&#8377;${stock.current_price}</div>
+                             <div class="stock-change ${cls}">${stock.pnl_pct > 0 ? '+':''}${stock.pnl_pct}%</div>`;
+                metaHtml = `Avg: &#8377;${stock.avg_price} &bull; 1Y High: &#8377;${stock.high_1y}`;
+                hintHtml = stock.reason;
+                pillHtml = '<span class="hint-pill sell">SELL</span>';
+            }
+            else if (type === 'buy') {
+                const cls = stock.pnl_pct >= 0 ? 'positive' : 'negative';
+                priceHtml = `<div class="stock-price">&#8377;${stock.current_price}</div>
+                             <div class="stock-change ${cls}">${stock.pnl_pct > 0 ? '+':''}${stock.pnl_pct}%</div>`;
+                metaHtml = `Avg: &#8377;${stock.avg_price} &bull; 6M Low: &#8377;${stock.low_6m}`;
+                hintHtml = stock.reason;
+                pillHtml = '<span class="hint-pill buy">BUY MORE</span>';
+            }
+            else if (type === 'reco') {
+                const cls = stock.change_pct >= 0 ? 'positive' : 'negative';
+                priceHtml = `<div class="stock-price">&#8377;${stock.ltp}</div>
+                             <div class="stock-change ${cls}">${stock.change_pct > 0 ? '+':''}${stock.change_pct}%</div>`;
+                metaHtml = stock.signals ? stock.signals.join(' &bull; ') : '';
+                if (stock.sector) pillHtml = `<span class="sector-chip">${stock.sector}</span>`;
+                hintHtml = `Signal strength: ${scoreDots(stock.score)}`;
+            }
+
+            return `
+                <div class="stock-row">
+                    <div class="stock-rank">${index + 1}</div>
+                    <div class="stock-info">
+                        <div class="stock-symbol">${stock.symbol} ${pillHtml}</div>
+                        <div class="stock-meta">${metaHtml}</div>
+                        ${hintHtml ? `<div class="stock-hint-text">${hintHtml}</div>` : ''}
+                        <div style="display:flex; gap:6px; margin-top:5px;">
+                            <a href="https://groww.in/stocks/${stock.symbol}" target="_blank" style="font-size:10px; color:var(--accent-green); text-decoration:none; padding:1px 5px; border:1px solid rgba(16,185,129,0.2); border-radius:3px;">Groww</a>
+                            <a href="https://www.google.com/finance/quote/${stock.symbol}:NSE" target="_blank" style="font-size:10px; color:var(--accent-blue); text-decoration:none; padding:1px 5px; border:1px solid rgba(59,130,246,0.2); border-radius:3px;">Google</a>
+                            <a href="https://www.google.com/search?q=${stock.symbol}+NSE+stock+news&tbm=nws" target="_blank" style="font-size:10px; color:var(--accent-purple); text-decoration:none; padding:1px 5px; border:1px solid rgba(139,92,246,0.2); border-radius:3px;">News</a>
+                        </div>
+                    </div>
+                    <div class="stock-values">${priceHtml}</div>
+                </div>`;
+        }
+
+        async function loadHoldings() {
+            try {
+                const res = await fetch('/api/holdings');
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+
+                document.getElementById('portfolio-badge').textContent = data.count;
+                document.getElementById('total-stocks').textContent = data.count;
+
+                const html = data.holdings.map((s, i) => renderStock(s, 'portfolio', i)).join('');
+                document.getElementById('portfolio-list').innerHTML = html || emptyState('No holdings found');
+            } catch(e) {
+                document.getElementById('portfolio-list').innerHTML = errorState(e.message);
+            }
+        }
+
+        async function loadAnalysis() {
+            try {
+                const res = await fetch('/api/analysis');
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+
+                document.getElementById('buy-signals').textContent = data.summary.buy_count;
+                document.getElementById('sell-signals').textContent = data.summary.sell_count;
+                document.getElementById('hold-count').textContent = data.summary.hold_count;
+                document.getElementById('sell-badge').textContent = data.summary.sell_count;
+                document.getElementById('buy-badge').textContent = data.summary.buy_count;
+
+                document.getElementById('sell-list').innerHTML = data.sell_hints.length > 0
+                    ? data.sell_hints.map((s, i) => renderStock(s, 'sell', i)).join('')
+                    : emptyState('No stocks near 1-year high');
+
+                document.getElementById('buy-list').innerHTML = data.buy_hints.length > 0
+                    ? data.buy_hints.map((s, i) => renderStock(s, 'buy', i)).join('')
+                    : emptyState('No stocks near 6-month low');
+
+            } catch(e) {
+                document.getElementById('sell-list').innerHTML = errorState(e.message);
+                document.getElementById('buy-list').innerHTML = errorState(e.message);
+            }
+        }
+
+        async function loadRecommendations() {
+            try {
+                const res = await fetch('/api/recommendations');
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+
+                const count = data.recommendations.length;
+                document.getElementById('reco-badge').textContent = count;
+                document.getElementById('reco-count').textContent = count;
+
+                document.getElementById('reco-list').innerHTML = count > 0
+                    ? data.recommendations.map((s, i) => renderStock(s, 'reco', i)).join('')
+                    : emptyState('Market closed or no signals');
+            } catch(e) {
+                document.getElementById('reco-list').innerHTML = errorState(e.message);
+            }
+        }
+
+        async function loadGenZ() {
+            try {
+                const res = await fetch('/api/genz');
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+
+                document.getElementById('genz-badge').textContent = data.themes.length + ' themes';
+
+                let html = '';
+                for (const theme of data.themes) {
+                    html += `
+                        <div style="margin-bottom: 20px;">
+                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; padding: 10px 14px; background: rgba(139, 92, 246, 0.05); border-radius: 10px; border: 1px solid rgba(139, 92, 246, 0.1);">
+                                <span style="font-size:24px;">${theme.emoji}</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:14px; font-weight:700; color:var(--text-primary);">${theme.theme}</div>
+                                    <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">${theme.global_trigger}</div>
+                                </div>
+                            </div>`;
+
+                    for (const stock of theme.stocks) {
+                        const changeClass = stock.change_pct >= 0 ? 'positive' : 'negative';
+                        const priceHtml = stock.ltp > 0
+                            ? `<div class="stock-price">&#8377;${stock.ltp}</div><div class="stock-change ${changeClass}">${stock.change_pct > 0 ? '+':''}${stock.change_pct}%</div>`
+                            : `<div class="stock-price" style="color:var(--text-muted)">--</div>`;
+
+                        const linksHtml = `<div style="display:flex; gap:8px; margin-top:5px;">
+                            <a href="https://groww.in/stocks/${stock.symbol}" target="_blank" style="font-size:10px; color:var(--accent-green); text-decoration:none; padding:2px 6px; border:1px solid rgba(16,185,129,0.3); border-radius:4px;">Groww</a>
+                            <a href="https://www.google.com/finance/quote/${stock.symbol}:NSE" target="_blank" style="font-size:10px; color:var(--accent-blue); text-decoration:none; padding:2px 6px; border:1px solid rgba(59,130,246,0.3); border-radius:4px;">Google</a>
+                            <a href="https://www.moneycontrol.com/india/stockpricequote/${stock.symbol}" target="_blank" style="font-size:10px; color:var(--accent-amber); text-decoration:none; padding:2px 6px; border:1px solid rgba(245,158,11,0.3); border-radius:4px;">MC</a>
+                            <a href="https://www.google.com/search?q=${stock.symbol}+NSE+stock+news&tbm=nws" target="_blank" style="font-size:10px; color:var(--accent-purple); text-decoration:none; padding:2px 6px; border:1px solid rgba(139,92,246,0.3); border-radius:4px;">News</a>
+                        </div>`;
+
+                        html += `
+                            <div class="stock-row">
+                                <div class="stock-info">
+                                    <div class="stock-symbol">${stock.symbol}</div>
+                                    <div class="stock-meta">${stock.reason}</div>
+                                    ${linksHtml}
+                                </div>
+                                <div class="stock-values">${priceHtml}</div>
+                            </div>`;
+                    }
+                    html += '</div>';
+                }
+
+                document.getElementById('genz-list').innerHTML = html;
+            } catch(e) {
+                document.getElementById('genz-list').innerHTML = errorState(e.message);
+            }
+        }
+
+        function emptyState(msg) {
+            return `<div class="empty-state"><div class="icon">&#128203;</div><p>${msg}</p></div>`;
+        }
+        function errorState(msg) {
+            return `<div class="error-state">${msg}</div>`;
+        }
+
+        function loadAll() {
+            document.getElementById('last-updated').textContent = 'Loading...';
+            loadHoldings();
+            loadAnalysis();
+            loadRecommendations();
+            loadGenZ();
+            setTimeout(() => {
+                const now = new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit', timeZone:'Asia/Kolkata'});
+                document.getElementById('last-updated').textContent = now + ' IST';
+            }, 3000);
+        }
+
+        loadAll();
+        setInterval(loadAll, 5 * 60 * 1000);
+    </script>
+</body>
+</html>
